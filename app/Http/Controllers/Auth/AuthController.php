@@ -122,9 +122,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function users()
+    public function users(Request $request)
     {
-        $users = User::paginate(2);
+        $limit = ($request->limit)? $request->limit : 10;
+        $users = User::paginate($limit);
         $data = [
             'data' => $users,
             'status' => 'ok',
